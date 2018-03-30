@@ -6,6 +6,8 @@ import java.util.Stack;
 
 import Util.TreeNode;
 
+//思路: 把所有左子节点放入栈中，遍历栈中元素，如果节点有右子节点，就把全部左子节点放入栈中。
+
 public class BinaryTreeInorderTraversal {
 
     public List<Integer> inorderTraversal(TreeNode root) {
@@ -15,20 +17,14 @@ public class BinaryTreeInorderTraversal {
         }
 
         Stack<TreeNode> stack = new Stack<>();
-        while (root != null) {
-            stack.push(root);
-            root = root.left;
-        }
-
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            result.add(node.val);
-
-            node = node.right;
-            while (node != null) {
-                stack.push(node);
-                node = node.left;
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
             }
+            root = stack.pop();
+            result.add(root.val);
+            root = root.right;
         }
         return result;
     }
