@@ -1,5 +1,7 @@
 package Tree;
 
+import java.util.List;
+
 import Util.TreeNode;
 
 public class Test {
@@ -11,6 +13,12 @@ public class Test {
         node.left = left;
         node.right = right;
 
-        System.out.println(new BinaryTreeTilt().findTilt(node));
+        TreeNode four = new TreeNode(4);
+        TreeNode five = new TreeNode(5);
+        left.left = four;
+        left.right = five;
+
+        List<List<Integer>> result = new FindLeavesofBinaryTree().findLeaves(node);
+        System.out.println(result);
     }
 }
