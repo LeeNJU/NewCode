@@ -12,7 +12,6 @@ public class FindModeinBinarySearchTree {
 
         int[] result = new int[1];
         Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
 
         int count = 1;
         int max_count = 0;
