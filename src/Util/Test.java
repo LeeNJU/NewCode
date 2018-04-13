@@ -1,12 +1,11 @@
 package Util;
 
-import Stack.DecodeString;
+import HashTable.WordPattern;
 
 public class Test {
 
     public static void main(String[] args) {
-        String s = "3[a]2[bc]";
-        DecodeString decodeString = new DecodeString();
-        decodeString.decodeString(s);
+        WordPattern wordPattern = new WordPattern();
+        wordPattern.wordPattern("abba", "dog cat cat dog");
     }
 }
