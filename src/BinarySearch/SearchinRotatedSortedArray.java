@@ -29,4 +29,31 @@ public class SearchinRotatedSortedArray {
 
         return -1;
     }
+
+    // 版本二：如果有重复元素呢
+    public boolean search2(int[] nums, int target) {
+        int left = 0, right = nums.length - 1, middle;
+        while (left <= right) {
+            middle = left + (right - left) / 2;
+            if (nums[middle] == target) {
+                return true;
+            } else if (nums[right] == nums[left]) {
+                --right;
+            } else if (nums[middle] > nums[right]) {
+                if (nums[middle] > target && target >= nums[left]) {
+                    right = middle - 1;
+                } else {
+                    left = middle + 1;
+                }
+            } else {
+                if (nums[middle] < target && target <= nums[right]) {
+                    left = middle + 1;
+                } else {
+                    right = middle - 1;
+                }
+            }
+        }
+
+        return false;
+    }
 }
