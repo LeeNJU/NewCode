@@ -10,7 +10,7 @@ public class SqrtOfX {
             return x;
         }
 
-        // 注意这里循环的方式，while用小于等于，那么middl必须是加1或者减1，否则会出现死循环
+        // 注意这里循环的方式，while用小于等于，那么middle必须是加1或者减1，否则会出现死循环
         int left = 1, right = x;
         while (left <= right) {
             int middle = left + (right - left) / 2;
