@@ -13,4 +13,12 @@ public class Interval {
         start = s;
         end = e;
     }
+
+    public int getStart() {
+        return start;
+    }
+
+    public int getEnd() {
+        return end;
+    }
 }
