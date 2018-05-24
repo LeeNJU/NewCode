@@ -2,6 +2,7 @@ package TwoPointers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 //题目描述:给定一个数组和一个值，从中找出四个数字，使得它们的和等于给定的值
@@ -43,6 +44,29 @@ public class FourSum {
                         --right;
                     }
                 }
+            }
+        }
+
+        return result;
+    }
+
+    // 题目描述:给定4个数组，找到tuple(i, j, k, l)使得A[i] + B[j] + C[k] + D[l] = 0，返回这样的tuple的个数
+    // 解法描述:遍历A和B，找到两两组合的下标，这个下标同时也是C和D的两两下标，记录每个和的个数
+    public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
+
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+        for (int i = 0; i < C.length; ++i) {
+            for (int j = 0; j < D.length; ++j) {
+                int sum = C[i] + D[j];
+                map.put(sum, map.getOrDefault(sum, 0) + 1);
+            }
+        }
+
+        int result = 0;
+        for (int i = 0; i < A.length; ++i) {
+            for (int j = 0; j < B.length; ++j) {
+                result += map.getOrDefault(-1 * (A[i] + B[j]), 0);
             }
         }
 
