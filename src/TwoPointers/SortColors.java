@@ -28,4 +28,30 @@ public class SortColors {
             }
         }
     }
+
+    // 题目描述:假设有k个颜色，进行排序
+    // 解法描述:依次排列每种颜色，例如先保证所有的1在左边，然后是所有的2，以此类推。
+
+    public void sortColors2(int[] colors, int k) {
+        int color1 = 1, color2 = k;
+        int left = 0, right = colors.length - 1;
+        int p = left - 1, q = right + 1;
+        while (color1 < color2) {
+            // 注意这里i必须小于1q
+            for (int i = left; i <= right && i < q;) {
+                if (colors[i] == color1) {
+                    swap(colors, ++p, i++);
+                } else if (colors[i] == color2) {
+                    swap(colors, i, --q);
+                } else {
+                    ++i;
+                }
+            }
+
+            left = p + 1;
+            right = q - 1;
+            ++color1;
+            --color2;
+        }
+    }
 }
