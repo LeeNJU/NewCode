@@ -38,4 +38,37 @@ public class BinaryTreeLevelOrderTraversal {
         }
         return result;
     }
+
+    // 变种: 要求层次遍历的顺序是从下往上
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            List<Integer> list = new ArrayList<Integer>();
+
+            int size = queue.size();
+            for (int i = 0; i < size; ++i) {
+                TreeNode node = queue.poll();
+                list.add(node.val);
+
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+
+            result.add(0, new ArrayList<Integer>(list));
+        }
+
+        return result;
+    }
 }
