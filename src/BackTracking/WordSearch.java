@@ -1,4 +1,4 @@
-package BinarySearch;
+package BackTracking;
 
 //题目描述:给定一个二维字符矩阵和一个字符串，从这个矩阵中找到一条路径，使得路径上的字符刚好组成给定的字符串，
 //         只能垂直或水平寻找
