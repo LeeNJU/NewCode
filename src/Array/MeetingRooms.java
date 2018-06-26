@@ -3,6 +3,7 @@ package Array;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import Util.Interval;
 
@@ -21,5 +22,24 @@ public class MeetingRooms {
         }
 
         return true;
+    }
+
+    // 题目描述:给定一组开会的开始和结束时间，最少需要几个会议室
+    // 解法描述:把不重叠的会议安排在同一个会议室，先按照开始时间排序，用最小堆保存interval的结束时间，遍历之前的interval，看是否能把当前interval放入到同一个会议室中，
+    // 最后最小堆的大小就是结果
+    public int minMeetingRooms(List<Interval> intervals) {
+        Collections.sort(intervals, (a, b) -> a.start - b.start);
+        PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
+
+        intervals.stream()
+                .forEach(interval -> {
+                    if (queue.isEmpty() || queue.peek() <= interval.start) {
+                        queue.poll();
+                    }
+
+                    queue.add(interval.end);
+                });
+
+        return queue.size();
     }
 }

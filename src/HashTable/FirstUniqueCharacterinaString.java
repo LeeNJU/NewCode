@@ -10,11 +10,7 @@ public class FirstUniqueCharacterinaString {
     public int firstUniqChar(String s) {
         HashMap<Character, Integer> hashMap = new HashMap<Character, Integer>();
         for (int i = 0; i < s.length(); ++i) {
-            if (hashMap.containsKey(s.charAt(i))) {
-                hashMap.put(s.charAt(i), hashMap.get(s.charAt(i)) + 1);
-            } else {
-                hashMap.put(s.charAt(i), 1);
-            }
+            hashMap.put(s.charAt(i), hashMap.getOrDefault(s.charAt(i), 0));
         }
 
         for (int i = 0; i < s.length(); ++i) {

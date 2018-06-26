@@ -16,14 +16,11 @@ public class SwapNodesinPairs {
         dummy.next = head;
         ListNode prev = dummy, cur = head;
 
-        while (cur != null) {
-            if (cur.next != null) {
-                prev.next = cur.next;
-                cur.next = prev.next.next;
-                prev.next.next = cur;
-                prev = prev.next.next;
-            }
-
+        while (cur != null && cur.next != null) {
+            prev.next = cur.next;
+            cur.next = prev.next.next;
+            prev.next.next = cur;
+            prev = cur;
             cur = cur.next;
         }
 
