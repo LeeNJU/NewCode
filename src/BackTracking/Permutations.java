@@ -3,6 +3,9 @@ package BackTracking;
 import java.util.ArrayList;
 import java.util.List;
 
+//题目描述：给定一组数组，不包含重复元素，返回这组数组所有的组合情况。
+//解法描述：递归回溯,用一个visited数组保存元素是否被访问过
+
 public class Permutations {
 
     private void dfs(int[] nums, List<Integer> list, List<List<Integer>> result) {
