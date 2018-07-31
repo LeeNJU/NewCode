@@ -17,13 +17,16 @@ public class OddEvenLinkedList {
         ListNode odd = new ListNode(0);
         ListNode odd_prev = odd;
 
+        int index = 0;
         while (head != null) {
-            odd_prev.next = head;
-            odd_prev = odd_prev.next;
-            head = head.next;
-            odd_prev.next = null;
+            ++index;
 
-            if (head != null) {
+            if (index % 2 == 1) {
+                odd_prev.next = head;
+                odd_prev = odd_prev.next;
+                head = head.next;
+                odd_prev.next = null;
+            } else {
                 even_prev.next = head;
                 even_prev = even_prev.next;
                 head = head.next;

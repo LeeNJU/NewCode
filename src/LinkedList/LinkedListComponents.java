@@ -19,15 +19,14 @@ public class LinkedListComponents {
 
         int result = 0;
         while (head != null) {
-            boolean found = false;
-            while (head != null && set.contains(head.val)) {
+            if (!set.contains(head.val)) {
                 head = head.next;
-                found = true;
+                continue;
             }
 
-            if (found) {
-                ++result;
-            } else {
+            ++result;
+            while (head != null && set.contains(head.val)) {
+                set.remove(head.val);
                 head = head.next;
             }
         }
