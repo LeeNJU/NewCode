@@ -6,6 +6,8 @@ package Array;
 //         于nums[i]，就把count减1，如果candidate不是最后要找的元素，那么一定会碰到足够多的其他元素使得这个
 //         candidate的count为0，如果candidate就是最后要找的元素，那么candidate的count会减少，但不会等于0
 
+import java.util.List;
+
 public class MajorityElement {
 
     public int majorityElement(int[] nums) {
@@ -23,5 +25,40 @@ public class MajorityElement {
         }
 
         return result;
+    }
+
+    // 题目描述:找到数组中出现次数大于n / 3的元素,假设数组中只有一个这样的元素
+    // 解法描述:解法与上题类似，现在要用两个top candidate元素来筛选
+
+    public int majorityNumber(List<Integer> nums) {
+        int candidate1 = 0, candidate2 = 0, count1 = 0, count2 = 0;
+        for (int num : nums) {
+            if (num == candidate1) {
+                ++count1;
+            } else if (num == candidate2) {
+                ++count2;
+            } else if (count1 == 0) {
+                candidate1 = num;
+                count1 = 1;
+            } else if (count2 == 0) {
+                candidate2 = num;
+                count2 = 1;
+            } else {
+                --count1;
+                --count2;
+            }
+        }
+
+        count1 = 0;
+        count2 = 0;
+        for (int num : nums) {
+            if (num == candidate1) {
+                ++count1;
+            } else if (num == candidate2) {
+                ++count2;
+            }
+        }
+
+        return count1 > count2 ? candidate1 : candidate2;
     }
 }
