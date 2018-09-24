@@ -26,6 +26,10 @@ public class TheMaze {
                 return true;
             }
 
+            if (visited[i][j]) {
+                continue;
+            }
+
             visited[i][j] = true;
             for (int k = 0; k < dx.length; ++k) {
                 int x = i + dx[k];
@@ -37,10 +41,8 @@ public class TheMaze {
                     y += dy[k];
                 }
 
-                if (!visited[x - dx[k]][y - dy[k]]) {
-                    queue.add(x - dx[k]);
-                    queue.add(y - dy[k]);
-                }
+                queue.add(x - dx[k]);
+                queue.add(y - dy[k]);
             }
         }
 
