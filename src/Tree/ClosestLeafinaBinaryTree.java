@@ -48,29 +48,26 @@ public class ClosestLeafinaBinaryTree {
         queue.add(node);
 
         while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; ++i) {
-                node = queue.poll();
-                if (set.contains(node)) {
-                    continue;
-                }
+            node = queue.poll();
+            if (set.contains(node)) {
+                continue;
+            }
 
-                set.add(node);
-                if (node.left == null && node.right == null) {
-                    return node.val;
-                }
+            set.add(node);
+            if (node.left == null && node.right == null) {
+                return node.val;
+            }
 
-                if (node.left != null) {
-                    queue.add(node.left);
-                }
+            if (node.left != null) {
+                queue.add(node.left);
+            }
 
-                if (node.right != null) {
-                    queue.add(node.right);
-                }
+            if (node.right != null) {
+                queue.add(node.right);
+            }
 
-                if (map.containsKey(node)) {
-                    queue.add(map.get(node));
-                }
+            if (map.containsKey(node)) {
+                queue.add(map.get(node));
             }
         }
 
