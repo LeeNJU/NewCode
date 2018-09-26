@@ -45,10 +45,6 @@ public class CombinationSum {
             return;
         }
 
-        if (index >= candidates.length) {
-            return;
-        }
-
         for (int i = index; i < candidates.length; ++i) {
             if (candidates[i] <= target) {
                 list.add(candidates[i]);
@@ -64,6 +60,37 @@ public class CombinationSum {
         List<Integer> list = new ArrayList<Integer>();
 
         dfs(candidates, 0, target, list, result);
+        return result;
+    }
+
+    // 题目描述:给定包含重复数字的数组和一个target，找到所有数字的组合，使得他们的和等于target，每个数字只能使用一次
+    // 解法描述:先排序，注意去重
+    private void dfs2(int[] candidates, int index, int target, List<Integer> list, List<List<Integer>> result) {
+        if (target == 0) {
+            result.add(new ArrayList<>(list));
+            return;
+        }
+
+
+        for (int i = index; i < candidates.length; ++i) {
+            if (i > index && candidates[i] == candidates[i - 1]) {
+                continue;
+            }
+
+            if (candidates[i] <= target) {
+                list.add(candidates[i]);
+                dfs2(candidates, i + 1, target - candidates[i], list, result);
+                list.remove(list.size() - 1);
+            }
+        }
+    }
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<Integer> list = new ArrayList<Integer>();
+
+        dfs2(candidates, 0, target, list, result);
         return result;
     }
 }
