@@ -39,4 +39,30 @@ public class CourseSchedule {
 
         return true;
     }
+
+    // 版本2:输出拓扑排序
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        int[] indegree = new int[numCourses];
+        for (int i = 0; i < prerequisites.length; ++i) {
+            ++indegree[prerequisites[i][0]];
+        }
+
+        int[] result = new int[numCourses];
+        for (int i = 0; i < numCourses; ++i) {
+            int index = findZeroIndegree(indegree);
+            if (index == -1) {
+                return new int[0];
+            }
+
+            result[i] = index;
+            indegree[index] = -1;
+            for (int j = 0; j < prerequisites.length; ++j) {
+                if (prerequisites[j][1] == index) {
+                    --indegree[prerequisites[j][0]];
+                }
+            }
+        }
+
+        return result;
+    }
 }
