@@ -1,6 +1,8 @@
 package String;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 //题目描述:给定一个字符串数字，如果这些数字翻转180度，判断是否跟原来的数字字符串相等，例如"69",翻转180度后，
@@ -28,5 +30,36 @@ public class StrobogrammaticNumber {
         }
 
         return true;
+    }
+
+    // version2
+    // 题目描述:给定一个n，找到所有长度为n的strobogramatic字符串,例如n=2，返回["11","69","88","96"]
+    // 解法描述:本质上就是bfs
+
+    public List<String> findStrobogrammatic(int n) {
+        List<String> prev = new ArrayList<String>();
+        if (n % 2 == 1) {
+            prev.add("1");
+            prev.add("0");
+            prev.add("8");
+            --n;
+        } else {
+            prev.add("");
+        }
+
+        String[] strings = { "00", "11", "88", "96", "69" };
+        while (n > 0) {
+            n -= 2;
+            List<String> cur = new ArrayList<String>();
+            for (int i = 0; i < prev.size(); ++i) {
+                for (int j = (n < 2 ? 1 : 0); j < strings.length; ++j) {
+                    // 注意这里，00不能作为字符串的结尾
+                    cur.add(strings[j].substring(0, 1) + prev.get(i) + strings[j].substring(1));
+                }
+            }
+            prev = cur;
+        }
+
+        return prev;
     }
 }
