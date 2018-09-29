@@ -8,6 +8,11 @@ package DynamicProgrammimg;
 //        可以组成多少个BST，dp[k - 1]表示以k为根节点，用k - 1个数字能组成多少个BST，dp[i - k]表示用了k个数字
 //        之后，还剩i - k个数字，能组成多少个BST
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Util.TreeNode;
+
 public class UniqueBinarySearchTrees {
 
     public int numTrees(int n) {
@@ -22,5 +27,38 @@ public class UniqueBinarySearchTrees {
         }
 
         return dp[n];
+    }
+
+    // 要求输出所有可能的BST
+    // 解法描述:递归，genTree表示产生所有以i为根节点的树，start <= i <= end
+    private List<TreeNode> generateTree(int start, int end) {
+        List<TreeNode> list = new ArrayList<TreeNode>();
+        if (start > end) {
+            list.add(null);
+            return list;
+        }
+
+        for (int i = start; i <= end; ++i) {
+            List<TreeNode> left = generateTree(start, i - 1);
+            List<TreeNode> right = generateTree(i + 1, end);
+
+            for (int j = 0; j < left.size(); ++j) {
+                for (int k = 0; k < right.size(); ++k) {
+                    TreeNode node = new TreeNode(i);
+                    node.left = left.get(j);
+                    node.right = right.get(k);
+                    list.add(node);
+                }
+            }
+        }
+
+        return list;
+    }
+
+    public List<TreeNode> generateTrees(int n) {
+        if (n == 0) {
+            return new ArrayList<>();
+        }
+        return generateTree(1, n);
     }
 }
