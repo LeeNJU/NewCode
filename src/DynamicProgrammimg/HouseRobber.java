@@ -3,6 +3,8 @@ package DynamicProgrammimg;
 //题目描述：给定一个整数数组代表每个家庭的钱，现在去抢劫，但是不能抢劫相连的两家，求最大能抢劫多少钱
 //解法描述：动态规划  dp[i] = max(dp[i - 1], dp[i - 2] + n[i]),由于只需要前面两个值，可以优化成常数空间
 
+import Util.TreeNode;
+
 public class HouseRobber {
 
     public int rob(int[] nums) {
@@ -58,5 +60,28 @@ public class HouseRobber {
         }
 
         return Math.max(rob(nums, 0, nums.length - 2), rob(nums, 1, nums.length - 1));
+    }
+
+    // 变种3:
+    // 房子被组织成二叉树的形式，父子节点不能同时被抢，求能抢到的最大值
+    // 解法描述:递归，用一个pair表示值，pair.first表示抢当前节点的最大值，pair.second表示不抢当前节点的最大值
+    private int[] rob3(TreeNode root) {
+        int[] result = new int[2];
+        if (root == null) {
+            return result;
+        }
+
+        int[] left = rob3(root.left);
+        int[] right = rob3(root.right);
+
+        result[0] = left[1] + right[1] + root.val;
+        result[1] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+
+        return result;
+    }
+
+    public int rob(TreeNode root) {
+        int[] result = rob3(root);
+        return Math.max(result[0], result[1]);
     }
 }
