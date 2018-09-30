@@ -24,4 +24,29 @@ public class ShortestWordDistance {
         }
         return result;
     }
+
+    // version3
+    // 题目描述:跟第一题一样，只是word1和word2可能是一样的
+    // 解法描述:跟第一题解法类似，不过要判断下标是否相等
+    int shortestDistance3(List<String> words, String word1, String word2) {
+        int min_distance = Integer.MAX_VALUE, index1 = -1, index2 = -1;
+
+        for (int i = 0; i < words.size(); ++i) {
+            if (words.get(i)
+                    .equals(word1)) {
+                index1 = i;
+                if (index2 != -1)
+                    min_distance = (index1 == index2 ? min_distance : Math.min(Math.abs(index1 - index2), min_distance));
+            }
+
+            if (words.get(i)
+                    .equals(word2)) {
+                index2 = i;
+                if (index1 != -1)
+                    min_distance = (index1 == index2 ? min_distance : Math.min(Math.abs(index1 - index2), min_distance));
+            }
+        }
+
+        return min_distance;
+    }
 }
