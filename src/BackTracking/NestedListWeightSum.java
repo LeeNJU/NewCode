@@ -1,6 +1,8 @@
 package BackTracking;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import Util.NestedInteger;
 
@@ -27,5 +29,35 @@ public class NestedListWeightSum {
 
     public int depthSum(List<NestedInteger> nestedList) {
         return dfs(nestedList, 1);
+    }
+
+    // 版本2:深度反过来，[1,[4,[6]]]，返回17，因为1 * 3 + 4 * 2 + 6 * 1 = 17
+    // bfs，weightedSum和unweightedSum，遍历一层就把元素加到unweightedSum，再加入到weightedSum，这样就可以重复加
+
+    public int depthSumInverse(List<NestedInteger> nestedList) {
+        int weightedSum = 0;
+        int unweightedSum = 0;
+
+        Queue<List<NestedInteger>> queue = new LinkedList<>();
+        queue.add(nestedList);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; ++i) {
+                List<NestedInteger> list = queue.poll();
+                for (NestedInteger nestedInteger : list) {
+                    if (nestedInteger.isInteger()) {
+                        unweightedSum += nestedInteger.getInteger();
+                    } else if (!nestedInteger.getList()
+                            .isEmpty()) {
+                        queue.add(nestedInteger.getList());
+                    }
+                }
+            }
+
+            weightedSum += unweightedSum;
+        }
+
+        return weightedSum;
     }
 }
