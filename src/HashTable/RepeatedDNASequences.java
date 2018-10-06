@@ -37,7 +37,6 @@ public class RepeatedDNASequences {
 
             map.put(num, map.getOrDefault(num, 0) + 1);
             if (map.get(num) == 2) {
-                map.put(num, map.get(num) + 1);
                 list.add(s.substring(i - 9, i + 1));
             }
         }
