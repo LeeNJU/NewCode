@@ -2,6 +2,7 @@ package Array;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.TreeSet;
 
 public class ContainsDuplicate {
 
@@ -31,6 +32,29 @@ public class ContainsDuplicate {
             }
 
             hashMap.put(nums[i], i);
+        }
+
+        return false;
+    }
+
+    // 题目描述：给定一个数组，判断是否存在元素A[i]和A[j]，使得i与j的差不超过k，A[i]与A[j]的差不超过t
+    // 解法描述：用一个treeset保存i到j之间的元素，i和j的差不超过k，对于当前元素nums[i],找到它的upper bound和lower bound
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+        TreeSet<Long> set = new TreeSet<Long>();
+
+        for (int i = 0; i < nums.length; ++i) {
+            if (i > k) {
+                set.remove(nums[i - k - 1]);
+            }
+
+            long n = (long) nums[i];
+            Long ceiling = set.ceiling(n);
+            Long floor = set.floor(n);
+            if ((ceiling != null && ceiling - n <= t) || (floor != null && nums[i] - floor <= t)) {
+                return true;
+            }
+
+            set.add(n);
         }
 
         return false;

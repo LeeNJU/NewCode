@@ -3,7 +3,7 @@ package Stack;
 import java.util.Stack;
 
 //题目描述：给定一个只包含()的字符串，找到最长的有效字符串，返回其长度，()为有效字符串
-//解法描述:count表示在一个有效字段内匹配过的最大的左括号的个数，result保存最大值，
+//解法描述:栈不为空表示前面有左括号，count的值代表前面有多少个左括号被匹配了
 
 public class LongestValidParentheses {
 
