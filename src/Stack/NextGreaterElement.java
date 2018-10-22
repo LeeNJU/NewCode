@@ -1,5 +1,6 @@
 package Stack;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -29,5 +30,29 @@ public class NextGreaterElement {
         }
 
         return result;
+    }
+
+    // 版本2:现在只给定一个循环数组，例如[1,2,1],返回数组[2,-1,2]
+    // 解法描述:跟上一题类似，只不过存的是下标
+    public int[] nextGreaterElements(int[] nums) {
+        int n = nums.length;
+        int[] next = new int[n];
+        Arrays.fill(next, -1);
+
+        Stack<Integer> stack = new Stack<>();
+        // 注意这里是2 * n,重复访问之前的元素，[1,2,1]是为了找到最后一个1的下一个最大元素
+        for (int i = 0; i < n * 2; ++i) {
+            int num = nums[i % n];
+            while (!stack.isEmpty() && nums[stack.peek()] < num) {
+                next[stack.pop()] = num;
+            }
+
+            // 只把前n个元素压入栈中
+            if (i < n) {
+                stack.push(i);
+            }
+        }
+
+        return next;
     }
 }
