@@ -27,4 +27,19 @@ public class CoinChange {
 
         return dp[amount] == amount + 1 ? -1 : dp[amount];
     }
+
+    // 版本2:每个硬币多无数个，求问有多少种组成amount的方式，例如Given amount = 8, coins = [2, 3, 8], return 3，因为有8， 3 + 3 + 2， 2 + 2 + 2 + 2
+    // 每个硬币可以使用多次，所以是正向遍历，不用考虑顺序
+    public int change(int amount, int[] coins) {
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+
+        for (int i = 0; i < coins.length; ++i) {
+            for (int j = coins[i]; j <= amount; ++j) {
+                dp[j] += dp[j - coins[i]];
+            }
+        }
+
+        return dp[amount];
+    }
 }
