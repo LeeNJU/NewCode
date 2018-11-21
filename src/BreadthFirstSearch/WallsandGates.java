@@ -10,12 +10,16 @@ import java.util.Queue;
 public class WallsandGates {
 
     public void wallsAndGates(int[][] rooms) {
+        int n = rooms.length, m = rooms[0].length;
+        boolean[][] visited = new boolean[n][m];
+
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < rooms.length; ++i) {
             for (int j = 0; j < rooms[0].length; ++j) {
                 if (rooms[i][j] == 0) {
                     queue.add(i);
                     queue.add(j);
+                    visited[i][j] = true;
                 }
             }
         }
@@ -31,12 +35,12 @@ public class WallsandGates {
                 int x = i + dx[k];
                 int y = j + dy[k];
 
-                // 下标越界或者为obstacle或者距离大于
-                if (x < 0 || y < 0 || x >= rooms.length || y >= rooms[0].length || rooms[x][y] == -1 || rooms[x][y] < rooms[i][j]) {
+                if (x < 0 || y < 0 || x >= n || y >= m || rooms[x][y] == -1 || visited[x][y]) {
                     continue;
                 }
 
                 rooms[x][y] = rooms[i][j] + 1;
+                visited[x][y] = true;
                 queue.add(x);
                 queue.add(y);
             }

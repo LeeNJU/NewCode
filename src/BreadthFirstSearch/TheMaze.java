@@ -19,6 +19,7 @@ public class TheMaze {
         Queue<Integer> queue = new LinkedList<>();
         queue.add(start[0]);
         queue.add(start[1]);
+        visited[start[0]][start[1]] = true;
         while (!queue.isEmpty()) {
             int i = queue.poll();
             int j = queue.poll();
@@ -27,11 +28,6 @@ public class TheMaze {
                 return true;
             }
 
-            if (visited[i][j]) {
-                continue;
-            }
-
-            visited[i][j] = true;
             for (int k = 0; k < dx.length; ++k) {
                 int x = i + dx[k];
                 int y = j + dy[k];
@@ -42,8 +38,11 @@ public class TheMaze {
                     y += dy[k];
                 }
 
-                queue.add(x - dx[k]);
-                queue.add(y - dy[k]);
+                if (!visited[x - dx[k]][y - dy[k]]) {
+                    queue.add(x - dx[k]);
+                    queue.add(y - dy[k]);
+                    visited[x - dx[k]][y - dy[k]] = true;
+                }
             }
         }
 
