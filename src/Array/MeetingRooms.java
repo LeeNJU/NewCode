@@ -28,12 +28,12 @@ public class MeetingRooms {
     // 解法描述:把不重叠的会议安排在同一个会议室，先按照开始时间排序，用最小堆保存interval的结束时间，遍历之前的interval，看是否能把当前interval放入到同一个会议室中，
     // 最后最小堆的大小就是结果
     public int minMeetingRooms(List<Interval> intervals) {
-        Collections.sort(intervals, (a, b) -> a.start - b.start);
+        Collections.sort(intervals, Comparator.comparingInt(Interval::getStart));
         PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
 
         intervals.stream()
                 .forEach(interval -> {
-                    if (queue.isEmpty() || queue.peek() <= interval.start) {
+                    if (!queue.isEmpty() && queue.peek() <= interval.start) {
                         queue.poll();
                     }
 
