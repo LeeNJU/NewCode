@@ -40,27 +40,27 @@ public class AllNodesDistanceKinBinaryTree {
         Set<TreeNode> visited = new HashSet<TreeNode>();
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.add(target);
+        visited.add(target);
 
         while (!queue.isEmpty() && K > 0) {
             --K;
             int size = queue.size();
             for (int i = 0; i < size; ++i) {
                 TreeNode node = queue.poll();
-                if (visited.contains(node)) {
-                    continue;
-                }
 
-                visited.add(node);
                 if (node.left != null && !visited.contains(node.left)) {
                     queue.add(node.left);
+                    visited.add(node.left);
                 }
 
                 if (node.right != null && !visited.contains(node.right)) {
                     queue.add(node.right);
+                    visited.add(node.right);
                 }
 
-                if (map.containsKey(node) && map.get(node) != null && !visited.contains(map.get(node))) {
+                if (map.getOrDefault(node, null) != null && !visited.contains(map.get(node))) {
                     queue.add(map.get(node));
+                    visited.add(map.get(node));
                 }
             }
         }

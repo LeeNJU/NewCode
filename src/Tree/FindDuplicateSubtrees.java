@@ -24,7 +24,7 @@ public class FindDuplicateSubtrees {
             return "#";
         }
 
-        String str = Integer.toString(root.val) + "," + dfs(root.left, map, list) + "," + dfs(root.right, map, list);
+        String str = root.val + "," + dfs(root.left, map, list) + "," + dfs(root.right, map, list);
         if (map.getOrDefault(str, 0) == 1) {
             list.add(root);
         }
