@@ -10,12 +10,10 @@ import java.util.Map;
 public class SatisfiabilityofEqualityEquations {
 
     private char root(char c, Map<Character, Character> map) {
-        char a = c;
-        while (map.getOrDefault(c, c) != c) {
+        while (map.get(c) != c) {
             c = map.get(c);
         }
 
-        map.put(a, c);
         return c;
     }
 
@@ -25,6 +23,9 @@ public class SatisfiabilityofEqualityEquations {
         Arrays.stream(equations)
                 .filter(equation -> equation.charAt(1) == '=')
                 .forEach(equation -> {
+                    map.putIfAbsent(equation.charAt(0), equation.charAt(0));
+                    map.putIfAbsent(equation.charAt(3), equation.charAt(3));
+
                     char root1 = root(equation.charAt(0), map);
                     char root2 = root(equation.charAt(3), map);
 
@@ -38,6 +39,9 @@ public class SatisfiabilityofEqualityEquations {
             if (equation.charAt(1) == '=') {
                 continue;
             }
+
+            map.putIfAbsent(equation.charAt(0), equation.charAt(0));
+            map.putIfAbsent(equation.charAt(3), equation.charAt(3));
 
             char root1 = root(equation.charAt(0), map);
             char root2 = root(equation.charAt(3), map);
