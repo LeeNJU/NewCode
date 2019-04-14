@@ -16,11 +16,11 @@ public class IncreasingOrderSearchTree {
 
     public TreeNode increasingBST(TreeNode root) {
         if (root == null) {
-            return root;
+            return null;
         }
 
+        root.right = increasingBST(root.right);
         if (root.left == null) {
-            root.right = increasingBST(root.right);
             return root;
         }
 
@@ -32,8 +32,6 @@ public class IncreasingOrderSearchTree {
 
         node.right = root;
         root.left = null;
-        root.right = increasingBST(root.right);
-
         return newRoot;
     }
 }
