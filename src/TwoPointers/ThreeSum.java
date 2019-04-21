@@ -31,10 +31,7 @@ public class ThreeSum {
 
                 int sum = nums[i] + nums[left] + nums[right];
                 if (sum == 0) {
-                    List<Integer> list = new ArrayList<Integer>();
-                    list.add(nums[i]);
-                    list.add(nums[left]);
-                    list.add(nums[right]);
+                    List<Integer> list = Arrays.asList(nums[i], nums[left], nums[right]);
                     result.add(list);
                     ++left;
                 } else if (sum < 0) {
