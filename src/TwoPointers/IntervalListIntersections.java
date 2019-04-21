@@ -36,9 +36,7 @@ public class IntervalListIntersections {
 
         Interval[] intervals = new Interval[list.size()];
         IntStream.range(0, list.size())
-                .forEach(index -> {
-                    intervals[index] = list.get(index);
-                });
+                .forEach(index -> intervals[index] = list.get(index));
 
         return intervals;
     }

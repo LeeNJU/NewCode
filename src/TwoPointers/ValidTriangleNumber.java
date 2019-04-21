@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class ValidTriangleNumber {
 
-    public static int trinumsngleNumber(int[] nums) {
+    public int trinumsngleNumber(int[] nums) {
         int result = 0;
         Arrays.sort(nums);
         for (int i = nums.length - 1; i > 1; --i) {
