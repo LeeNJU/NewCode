@@ -14,7 +14,7 @@ public class KokoEatingBananas {
             left = Math.min(left, num);
         }
 
-        while (left < right) {
+        while (left <= right) {
             int middle = left + (right - left) / 2;
             int count = Arrays.stream(piles)
                     .map(num -> (int) Math.ceil(num * 1.0 / middle))
@@ -22,7 +22,7 @@ public class KokoEatingBananas {
 
             // 小于H，说明middle的值是有效的
             if (count <= H) {
-                right = middle;
+                right = middle - 1;
             } else {
                 left = middle + 1;
             }
