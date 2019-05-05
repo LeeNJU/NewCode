@@ -16,6 +16,7 @@ public class RouteBetweenTwoNodesinGraph {
         HashSet<DirectedGraphNode> visited = new HashSet<>();
         Queue<DirectedGraphNode> queue = new LinkedList<>();
         queue.add(s);
+        visited.add(s);
 
         while (!queue.isEmpty()) {
             DirectedGraphNode node = queue.poll();
@@ -23,10 +24,12 @@ public class RouteBetweenTwoNodesinGraph {
                 return true;
             }
 
-            visited.add(node);
             node.neighbors.stream()
                     .filter(directedGraphNode -> !visited.contains(directedGraphNode))
-                    .forEach(directedGraphNode -> queue.add(directedGraphNode));
+                    .forEach(directedGraphNode -> {
+                        queue.add(directedGraphNode);
+                        visited.add(directedGraphNode);
+                    });
         }
 
         return false;

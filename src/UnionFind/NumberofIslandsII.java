@@ -57,7 +57,7 @@ public class NumberofIslandsII {
                 // 当前节点合并到已有的岛
                 int root2 = root(arrays, x * m + y);
                 if (root1 != root2) {
-                    arrays[root1] = root2;
+                    arrays[root2] = root1;
                     --count;
                 }
 
