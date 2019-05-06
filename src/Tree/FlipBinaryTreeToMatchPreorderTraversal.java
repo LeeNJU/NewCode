@@ -20,11 +20,12 @@ public class FlipBinaryTreeToMatchPreorderTraversal {
         }
 
         // 当前节点无法匹配
-        if (root.val != voyage[index++]) {
+        if (root.val != voyage[index]) {
             return false;
         }
 
         // 左子树不匹配，需要交换
+        ++index;
         if (root.left != null && root.left.val != voyage[index]) {
             list.add(root.val);
             return dfs(root.right, voyage, list) && dfs(root.left, voyage, list);

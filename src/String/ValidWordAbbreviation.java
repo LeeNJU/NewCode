@@ -24,7 +24,6 @@ public class ValidWordAbbreviation {
             } else if (word.charAt(i) == abbr.charAt(j)) {
                 ++i;
                 ++j;
-                continue;
             } else {
                 return false;
             }
