@@ -41,17 +41,14 @@ public class RemoveInvalidParentheses {
         Queue<String> queue = new LinkedList<String>();
         queue.add(s);
         HashSet<String> set = new HashSet<String>();
+        set.add(s);
         boolean found = false;
 
         List<String> result = new ArrayList<String>();
 
         while (!queue.isEmpty()) {
             String str = queue.poll();
-            if (set.contains(str)) {
-                continue;
-            }
 
-            set.add(str);
             if (isValid(str)) {
                 found = true;
                 result.add(str);
@@ -63,8 +60,10 @@ public class RemoveInvalidParentheses {
                     continue;
                 }
 
-                if (!found) {
-                    queue.add(str.substring(0, i) + str.substring(i + 1));
+                String string = str.substring(0, i) + str.substring(i + 1);
+                if (!found && !set.contains(string)) {
+                    queue.add(string);
+                    set.add(string);
                 }
             }
         }

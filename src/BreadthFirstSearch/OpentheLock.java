@@ -20,6 +20,10 @@ public class OpentheLock {
         Arrays.stream(deadends)
                 .forEach(str -> deadSet.add(str));
 
+        if (deadSet.contains("0000")) {
+            return -1;
+        }
+
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int i = 0; i < size; ++i) {
@@ -28,22 +32,23 @@ public class OpentheLock {
                     return level;
                 }
 
-                if (deadSet.contains(string) || visited.contains(string)) {
-                    continue;
-                }
-
-                visited.add(string);
                 char[] chars = string.toCharArray();
                 for (int j = 0; j < chars.length; ++j) {
                     char prev = chars[j];
                     chars[j] = chars[j] < '9' ? ++chars[j] : '0';
                     String str = new String(chars);
-                    queue.add(str);
+                    if (!visited.contains(str) && !deadSet.contains(str)) {
+                        queue.add(str);
+                        visited.add(str);
+                    }
 
                     chars[j] = prev;
                     chars[j] = chars[j] == '0' ? '9' : --chars[j];
                     str = new String(chars);
-                    queue.add(str);
+                    if (!visited.contains(str) && !deadSet.contains(str)) {
+                        queue.add(str);
+                        visited.add(str);
+                    }
 
                     chars[j] = prev;
                 }
