@@ -28,9 +28,7 @@ public class CheapestFlightsWithinKStops {
 
         graph.getOrDefault(node, new ArrayList<Pair<Integer, Integer>>())
                 .stream()
-                .forEach(pair -> {
-                    dfs(pair.getKey(), dst, visited, curCost + pair.getValue(), k - 1, graph);
-                });
+                .forEach(pair -> dfs(pair.getKey(), dst, visited, curCost + pair.getValue(), k - 1, graph));
 
         visited[node] = false;
 

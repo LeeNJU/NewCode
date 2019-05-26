@@ -18,8 +18,9 @@ public class NumberofLongestIncreasingSubsequence {
         for (int i = 1; i < nums.length; ++i) {
             for (int j = 0; j < i; ++j) {
                 if (nums[i] > nums[j]) {
-                    if (length[i] == length[j] + 1)
+                    if (length[i] == length[j] + 1) {
                         count[i] += count[j];
+                    }
 
                     if (length[i] < length[j] + 1) {
                         length[i] = length[j] + 1;

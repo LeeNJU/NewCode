@@ -12,28 +12,25 @@ public class SurroundedRegions {
         Queue<Integer> queue = new LinkedList<Integer>();
         queue.add(i);
         queue.add(j);
+        board[i][j] = '#';
 
         while (!queue.isEmpty()) {
             int x = queue.poll();
             int y = queue.poll();
 
-            if (board[x][y] == '#') {
-                continue;
-            }
-
-            board[x][y] = '#';
             int[] dx = { 1, -1, 0, 0 };
             int[] dy = { 0, 0, 1, -1 };
             for (int k = 0; k < dx.length; ++k) {
                 int row = dx[k] + x;
                 int col = dy[k] + y;
 
-                if (row < 0 || col < 0 || row >= board.length || col >= board[0].length || board[row][col] != 'O') {
+                if (row < 0 || col < 0 || row >= board.length || col >= board[0].length || board[row][col] != 'O' || board[row][col] == '#') {
                     continue;
                 }
 
                 queue.add(row);
                 queue.add(col);
+                board[row][col] = '#';
             }
         }
     }
