@@ -19,12 +19,13 @@ public class BinaryTreeMaximumPathSum {
         int left = dfs(root.left);
         int right = dfs(root.right);
 
-        int sum = root.val + Math.max(left, right);
-        sum = Math.max(sum, root.val);
-        result = Math.max(sum, result);
+        int rightSum = Math.max(root.val, root.val + right);
+        int leftSum = Math.max(root.val, root.val + left);
+
+        result = Math.max(Math.max(leftSum, rightSum), result);
         result = Math.max(result, left + right + root.val);
 
-        return sum;
+        return Math.max(leftSum, rightSum);
     }
 
     public int maxPathSum(TreeNode root) {

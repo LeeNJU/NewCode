@@ -17,9 +17,7 @@ public class ShoppingOffers {
                 .map(index -> needs.get(index) * prices.get(index))
                 .sum();
 
-        for (int i = 0; i < special.size(); ++i) {
-            List<Integer> offer = special.get(i);
-
+        for (List<Integer> offer : special) {
             // 如果可以使用这个special offer
             if (IntStream.range(0, needs.size())
                     .allMatch(index -> needs.get(index) >= offer.get(index))) {

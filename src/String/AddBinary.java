@@ -12,7 +12,7 @@ public class AddBinary {
             int c1 = (i >= 0 ? a.charAt(i) : '0') - '0';
             int c2 = (j >= 0 ? b.charAt(j) : '0') - '0';
 
-            result = Integer.toString((c1 + c2 + carry) % 2) + result;
+            result = ((c1 + c2 + carry) % 2) + result;
             carry = (c1 + c2 + carry) / 2;
 
             --i;

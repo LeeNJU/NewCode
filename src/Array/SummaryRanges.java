@@ -25,7 +25,7 @@ public class SummaryRanges {
             if (first == last) {
                 result.add(Integer.toString(first));
             } else {
-                result.add(Integer.toString(first) + "->" + Integer.toString(last));
+                result.add(first + "->" + last);
             }
 
             first = nums[i];
@@ -35,7 +35,7 @@ public class SummaryRanges {
         if (first == last) {
             result.add(Integer.toString(first));
         } else {
-            result.add(Integer.toString(first) + "->" + Integer.toString(last));
+            result.add(first + "->" + last);
         }
 
         return result;
