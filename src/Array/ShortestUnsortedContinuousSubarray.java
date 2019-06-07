@@ -11,8 +11,6 @@ public class ShortestUnsortedContinuousSubarray {
         int max = nums[0], min = nums[n - 1];
         int start = -1, end = -2;
         for (int i = 1; i < n; ++i) {
-            max = Math.max(max, nums[i]);
-            min = Math.min(min, nums[n - i - 1]);
 
             // 当前元素比max小，说明这个位置需要重新排序
             if (nums[i] < max) {
@@ -23,6 +21,9 @@ public class ShortestUnsortedContinuousSubarray {
             if (nums[n - i - 1] > min) {
                 start = n - i - 1;
             }
+
+            max = Math.max(max, nums[i]);
+            min = Math.min(min, nums[n - i - 1]);
         }
 
         return end - start + 1;
