@@ -29,9 +29,6 @@ public class LongestContinuousIncreasingSubsequence {
             }
         }
 
-        result = Math.max(result, increaseCount);
-        result = Math.max(result, decreaseCount);
-
         return result;
     }
 }
