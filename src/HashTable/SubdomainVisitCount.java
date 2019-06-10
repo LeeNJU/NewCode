@@ -25,7 +25,7 @@ public class SubdomainVisitCount {
 
         return map.keySet()
                 .stream()
-                .map(key -> Integer.toString(map.get(key)) + " " + key)
+                .map(key -> map.get(key) + " " + key)
                 .collect(Collectors.toList());
     }
 }
