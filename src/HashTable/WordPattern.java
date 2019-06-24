@@ -13,15 +13,19 @@ public class WordPattern {
             return false;
         }
 
-        HashMap<Character, String> map = new HashMap<Character, String>();
+        HashMap<Character, String> map1 = new HashMap<Character, String>();
+        HashMap<String, Character> map2 = new HashMap<String, Character>();
         for (int i = 0; i < strs.length; ++i) {
-            if (!map.containsKey(pattern.charAt(i)) && !map.containsValue(strs[i])) {
-                map.put(pattern.charAt(i), strs[i]);
-            } else if (!map.containsKey(pattern.charAt(i))) {
-                return false;
-            } else if (!strs[i].equals(map.get(pattern.charAt(i)))) {
+            char c = pattern.charAt(i);
+            if (!map1.getOrDefault(c, strs[i])
+                    .equals(strs[i])
+                    || !map2.getOrDefault(strs[i], c)
+                            .equals(c)) {
                 return false;
             }
+
+            map1.put(c, strs[i]);
+            map2.put(strs[i], c);
         }
 
         return true;
