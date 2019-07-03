@@ -2,49 +2,36 @@ package Stack;
 
 import java.util.Stack;
 
-//题目描述:给定一个字符串，包含加减乘除号，以及数字和空格，算出结果，例如"3+2*2"，结果为7
-//解法描述:用栈遍历，保存前一个操作符
+//题目描述:给定一个字符串，包含数字，加减号和括号，算出正确的值，例如"(1+(4+5+2)-3)+(6+8)"，返回23
+//解法描述:遍历字符串，由于有括号的存在，会导致每个数字的符号会发生改变，用stack保存当前括号外的符号，
 
 public class BasicCalculator {
 
     public int calculate(String s) {
         Stack<Integer> stack = new Stack<Integer>();
-        // 前一个操作符
-        char sign = '+';
-        for (int i = 0; i < s.length();) {
-            if (s.charAt(i) == ' ') {
-                ++i;
-                continue;
-            }
+        int sign = 1;
+        stack.push(sign);
 
-            if (Character.isDigit(s.charAt(i))) {
-                int num = 0;
-                while (i < s.length() && Character.isDigit(s.charAt(i))) {
-                    num = num * 10 + s.charAt(i) - '0';
-                    ++i;
-                }
+        int number = 0;
+        int result = 0;
 
-                if (sign == '+') {
-                    stack.add(num);
-                } else if (sign == '-') {
-                    stack.add(-num);
-                } else if (sign == '*') {
-                    stack.add(stack.pop() * num);
-                } else if (sign == '/') {
-                    stack.add(stack.pop() / num);
-                }
-
-                // 更新操作符
-                if (i < s.length()) {
-                    sign = s.charAt(i);
-                }
-            } else {
-                sign = s.charAt(i++);
+        for (int i = 0; i < s.length(); ++i) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                number = number * 10 + c - '0';
+            } else if (c == '(') {
+                stack.push(sign);
+            } else if (c == ')') {
+                stack.pop();
+            } else if (c == '+' || c == '-') {
+                result += sign * number;
+                number = 0;
+                sign = stack.peek() * (c == '+' ? 1 : -1);
             }
         }
 
-        return stack.stream()
-                .reduce((a, b) -> a + b)
-                .orElse(0);
+        // 最后一个数字
+        result += sign * number;
+        return result;
     }
 }
