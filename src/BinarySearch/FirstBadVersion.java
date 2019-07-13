@@ -16,7 +16,7 @@ public class FirstBadVersion {
             // 注意这里，这种方式可以防止溢出
             middle = left + (right - left) / 2;
             if (isBadVersion(middle)) {
-                right = middle;
+                right = middle - 1;
             } else {
                 left = middle + 1;
             }
