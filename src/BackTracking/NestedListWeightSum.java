@@ -35,29 +35,27 @@ public class NestedListWeightSum {
     // bfs，weightedSum和unweightedSum，遍历一层就把元素加到unweightedSum，再加入到weightedSum，这样就可以重复加
 
     public int depthSumInverse(List<NestedInteger> nestedList) {
-        int weightedSum = 0;
-        int unweightedSum = 0;
-
-        Queue<List<NestedInteger>> queue = new LinkedList<>();
-        queue.add(nestedList);
+        int weighted = 0, unweighted = 0;
+        Queue<NestedInteger> queue = new LinkedList<NestedInteger>();
+        nestedList.stream()
+                .forEach(queue::add);
 
         while (!queue.isEmpty()) {
             int size = queue.size();
-            for (int i = 0; i < size; ++i) {
-                List<NestedInteger> list = queue.poll();
-                for (NestedInteger nestedInteger : list) {
-                    if (nestedInteger.isInteger()) {
-                        unweightedSum += nestedInteger.getInteger();
-                    } else if (!nestedInteger.getList()
-                            .isEmpty()) {
-                        queue.add(nestedInteger.getList());
-                    }
+            while (size-- > 0) {
+                NestedInteger nestedInteger = queue.poll();
+                if (nestedInteger.isInteger()) {
+                    unweighted += nestedInteger.getInteger();
+                } else {
+                    nestedInteger.getList()
+                            .stream()
+                            .forEach(queue::add);
                 }
             }
 
-            weightedSum += unweightedSum;
+            weighted += unweighted;
         }
 
-        return weightedSum;
+        return weighted;
     }
 }
