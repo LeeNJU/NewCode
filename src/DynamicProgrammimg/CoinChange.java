@@ -11,11 +11,6 @@ public class CoinChange {
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, amount + 1);
         dp[0] = 0;
-        for (int coin : coins) {
-            if (coin < amount + 1) {
-                dp[coin] = 1;
-            }
-        }
 
         // 注意，外循环从coin开始，表示求的是组合的情况，如果外循环从amount开始，表示求的是排列的情况
         // 此题组合和排列的结果是一样的，因为不改变需要的硬币数量
