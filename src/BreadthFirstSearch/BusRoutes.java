@@ -16,9 +16,8 @@ public class BusRoutes {
         HashMap<Integer, List<Integer>> graph = new HashMap<Integer, List<Integer>>();
         for (int i = 0; i < routes.length; ++i) {
             for (int j = 0; j < routes[i].length; ++j) {
-                List<Integer> list = graph.getOrDefault(routes[i][j], new ArrayList<Integer>());
-                list.add(i);
-                graph.put(routes[i][j], list);
+                graph.computeIfAbsent(routes[i][j], key -> new ArrayList<Integer>())
+                        .add(i);
             }
         }
 
@@ -26,7 +25,7 @@ public class BusRoutes {
         Queue<Integer> queue = new LinkedList<Integer>();
         queue.add(S);
 
-        int level = 1;
+        int level = 0;
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int i = 0; i < size; ++i) {
