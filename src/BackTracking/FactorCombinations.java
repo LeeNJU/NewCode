@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FactorCombinations {
 
-    private void dfs(int n, List<Integer> list, List<List<Integer>> result) {
+    private void dfs(int n, int index, List<Integer> list, List<List<Integer>> result) {
         if (n == 1) {
             if (list.size() > 1) {
                 result.add(new ArrayList<Integer>(list));
@@ -16,10 +16,10 @@ public class FactorCombinations {
             return;
         }
 
-        for (int i = 2; i <= n; ++i) {
-            if (n % i == 0 && (list.isEmpty() || i >= list.get(list.size() - 1))) {
+        for (int i = index; i <= n; ++i) {
+            if (n % i == 0) {
                 list.add(i);
-                dfs(n / i, list, result);
+                dfs(n / i, index, list, result);
                 list.remove(list.size() - 1);
             }
         }
@@ -27,7 +27,7 @@ public class FactorCombinations {
 
     public List<List<Integer>> getFactors(int n) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
-        dfs(n, new ArrayList<>(), result);
+        dfs(n, 2, new ArrayList<>(), result);
         return result;
     }
 }
