@@ -41,22 +41,13 @@ public class DecodeString {
                 strs.pop();
 
                 int count = nums.pop();
-                StringBuilder stringBuilder = new StringBuilder();
-                while (count > 0) {
-                    stringBuilder.append(string);
-                    --count;
-                }
-
-                strs.push(stringBuilder.toString());
+                strs.push(string.repeat(count));
                 ++i;
             }
         }
 
-        String result = "";
-        while (!strs.isEmpty()) {
-            result = strs.pop() + result;
-        }
-
-        return result;
+        return strs.stream()
+                .reduce((a, b) -> a + b)
+                .orElse("");
     }
 }
