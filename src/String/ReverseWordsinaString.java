@@ -7,18 +7,28 @@ package String;
 public class ReverseWordsinaString {
 
     public String reverseWords(String s) {
-        s = s.trim();
-        String[] strings = s.split(" ");
-
-        String result = "";
-        for (int i = strings.length - 1; i >= 0; --i) {
-            if (strings[i].length() == 0) {
-                continue;
+        StringBuilder result = new StringBuilder();
+        char[] arrays = s.toCharArray();
+        int j = s.length() - 1;
+        while (j >= 0) {
+            while (j >= 0 && arrays[j] == ' ') {
+                --j;
             }
 
-            result += strings[i] + " ";
+            int i = j;
+            while (j >= 0 && arrays[j] != ' ') {
+                --j;
+            }
+
+            int index = j + 1;
+            while (index <= i) {
+                result.append(arrays[index++]);
+            }
+
+            result.append(' ');
         }
 
-        return result.trim();
+        return result.toString()
+                .trim();
     }
 }

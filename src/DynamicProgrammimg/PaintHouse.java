@@ -25,4 +25,36 @@ public class PaintHouse {
 
         return Math.min(red, Math.min(green, blue));
     }
+
+    // 题目描述:现在有k个颜色，求最小的cost
+    // 解法描述:只需要保存k个颜色中cost最小和第二小的值，以及最小值的下标，不需要保存数组
+    public int minCostII(int[][] costs) {
+        if (costs.length == 0 || costs[0].length == 0) {
+            return 0;
+        }
+
+        int min1 = 0;
+        int min2 = 0;
+        int index1 = 0;
+
+        for (int i = 0; i < costs.length; ++i) {
+            int m1 = Integer.MAX_VALUE, m2 = Integer.MAX_VALUE, index2 = 0;
+            for (int j = 0; j < costs[i].length; ++j) {
+                int cost = costs[i][j] + (j == index1 ? min2 : min1);
+                if (cost < m1) {
+                    m2 = m1;
+                    m1 = cost;
+                    index2 = j;
+                } else if (cost < m2) {
+                    m2 = cost;
+                }
+            }
+
+            index1 = index2;
+            min1 = m1;
+            min2 = m2;
+        }
+
+        return min1;
+    }
 }
